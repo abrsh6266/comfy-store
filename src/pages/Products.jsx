@@ -1,4 +1,4 @@
-import { Filters, Pagination, ProductsContainer } from "../components";
+import { Filters, PaginationContainer, ProductsContainer } from "../components";
 import { customFetch } from "../utils";
 const url = "/products";
 
@@ -15,7 +15,7 @@ const Products = () => {
     <>
       <Filters />
       <ProductsContainer />
-      <Pagination />
+      <PaginationContainer />
     </>
   );
 };
