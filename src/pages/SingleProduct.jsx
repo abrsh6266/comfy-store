@@ -22,13 +22,14 @@ const SingleProduct = () => {
   };
 
   const cartProduct = {
-    cartId: product.id + productColor,
-    productId: product.id,
+    cartID: product.id + productColor,
+    productID: product.id,
     image,
     title,
     price,
-    company,
+    amount,
     productColor,
+    company,
   };
   const dispatch = useDispatch();
   const handleAddToCart = () => {
