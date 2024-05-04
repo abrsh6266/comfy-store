@@ -1,37 +1,39 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
+import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 const themes = {
-  winter: 'winter',
-  dracula: 'dracula',
+  winter: "winter",
+  dracula: "dracula",
 };
 
-const getThemeFromLocalStorage = () => {
-  const theme = localStorage.getItem('theme') || themes.winter;
-  document.documentElement.setAttribute('data-theme', theme);
+export const getThemeFromLocalStorage = () => {
+  const theme = localStorage.getItem("theme") || themes.winter;
+  document.documentElement.setAttribute("data-theme", theme);
   return theme;
 };
 
 const initialState = {
-  user: { username: 'coding addict' },
+  user: { username: "coding addict" },
   theme: getThemeFromLocalStorage(),
 };
 
 const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {
     loginUser: (state, action) => {
-      console.log('login');
+      console.log("login");
     },
     logoutUser: (state) => {
-      console.log('logout');
+      state.user = null;
+      localStorage.removeItem("user");
+      toast.success("user logout successfully");
     },
     toggleTheme: (state) => {
       const { dracula, winter } = themes;
       state.theme = state.theme === dracula ? winter : dracula;
-      document.documentElement.setAttribute('data-theme', state.theme);
-      localStorage.setItem('theme', state.theme);
+      document.documentElement.setAttribute("data-theme", state.theme);
+      localStorage.setItem("theme", state.theme);
     },
   },
 });
