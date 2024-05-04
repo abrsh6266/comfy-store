@@ -1,5 +1,24 @@
 import { FormInput, SubmitBtn } from "../components";
 import { Form, Link } from "react-router-dom";
+export const action =
+  (store) =>
+  async ({ request }) => {
+    console.log(store);
+    const formData = request.formData(request);
+    const data = Object.fromEntries(formData);
+    try {
+      const response = await customFetch.post("/auth/local", data);
+      toast.success("successfully logged in");
+      return redirect("/");
+    } catch (error) {
+      const errorMessage =
+        error?.response?.data?.error?.message ||
+        "please double check your credentials";
+
+      toast.error(errorMessage);
+      return null;
+    }
+  };
 
 const Login = () => {
   return (
@@ -32,7 +51,9 @@ const Login = () => {
           <Link
             to={"/register"}
             className="ml-2 link link-hover link-primary capitalize"
-          >Register</Link>
+          >
+            Register
+          </Link>
         </p>
       </Form>
     </section>
